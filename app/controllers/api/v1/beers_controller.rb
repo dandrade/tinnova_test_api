@@ -1,10 +1,12 @@
 class Api::V1::BeersController < ApplicationController
   before_action :authenticate!
   before_action :get_beer, only: [:show]
+  before_action :get_beers, only: [:index]
+  before_action :get_favorite, only: [:favorite]
 
   def index
     render json: {
-        beers: Beers::PunkService.new.retrieve_beers(beer_name: beer_params['name'], abv: beer_params['abv'], page_number: beer_params['page'])
+        beers: @beers
     }
   end
 
@@ -15,9 +17,8 @@ class Api::V1::BeersController < ApplicationController
   end
 
   def favorite
-    @beer = UserBeer.favorite_beer(beer_params['id'], @current_user)
     render json: {
-      beer: @beer
+      beer: @favorite
     }
   end
 
@@ -35,8 +36,16 @@ class Api::V1::BeersController < ApplicationController
 
   private
 
+  def get_beers
+    @beers = Beer.get_beers(beer_name: beer_params['name'], abv: beer_params['abv'], page_number: beer_params['page'])
+  end
+
   def get_beer
     @beer = Beer.get_beer(beer_params['id'], @current_user)
+  end
+
+  def get_favorite
+    @favorite = UserBeer.favorite_beer(beer_params['id'], @current_user)
   end
 
   def beer_params

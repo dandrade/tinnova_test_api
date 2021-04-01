@@ -6,6 +6,10 @@ class Beer < ApplicationRecord
   has_many :user_beers
   has_many :users, through: :user_beers
 
+  def self.get_beers(beer_name: nil, abv: nil, page_number: 1)
+    Beers::PunkService.new.retrieve_beers(beer_name: beer_name, abv: abv, page_number: page_number)
+  end
+
   def self.get_beer(beer_id, user)
     response = Beers::PunkService.new.retrieve_beer(beer_id)
     response = response.first
