@@ -16,6 +16,14 @@ module Beers
       parse_response(request.body)
     end
 
+    def retrieve_beer(beer_id)
+      params = { ids: beer_id.to_i }
+
+      request = @punk.get '', params
+
+      parse_response(request.body)
+    end
+
     def parse_response(response)
       parser = JSON.parse(response)
       parser.map{ |beer| beer.slice("id","name", "tagline", "description", "abv")}

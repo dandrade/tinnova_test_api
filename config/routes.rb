@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'authentication#login'
 
       resources :beers, only: [:index, :show] do
-        post :favorite, on: :member
+        get :favorite, on: :member
         get :favorites, on: :collection
       end
     end
