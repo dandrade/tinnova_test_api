@@ -1,4 +1,4 @@
-class BeersController < ApplicationController
+class Api::V1::BeersController < ApplicationController
   before_action :authenticate!
 
   def index

@@ -1,4 +1,4 @@
-class AuthenticationController < ApplicationController
+class Api::V1::AuthenticationController < ApplicationController
   def login
     render json: Auth::AuthenticationService.login(login_params)
   end
