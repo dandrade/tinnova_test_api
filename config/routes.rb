@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :beers, only: [:index, :show] do
         get :favorite, on: :member
         get :favorites, on: :collection
+        get :all, on: :collection
       end
     end
   end

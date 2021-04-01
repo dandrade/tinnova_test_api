@@ -21,6 +21,18 @@ class Api::V1::BeersController < ApplicationController
     }
   end
 
+  def favorites
+    render json: {
+      beers: @current_user.all_beers(favorite: true)
+    }
+  end
+
+  def all
+    render json: {
+      beers: @current_user.all_beers
+    }
+  end
+
   private
 
   def get_beer

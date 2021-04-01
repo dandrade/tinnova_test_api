@@ -11,17 +11,17 @@ module Beers
       params[:beer_name] = beer_name if beer_name.present?
       params.merge!(abv_lt: (abv.to_f + 0.1), abv_gt: (abv.to_f - 0.1)) if abv.present?
 
-      request = @punk.get '', params
-
-      parse_response(request.body)
+      parse_response(make_request(params))
     end
 
     def retrieve_beer(beer_id)
       params = { ids: beer_id.to_i }
+      parse_response(make_request(params))
+    end
 
+    def make_request(params)
       request = @punk.get '', params
-
-      parse_response(request.body)
+      request.body
     end
 
     def parse_response(response)

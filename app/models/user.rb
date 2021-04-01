@@ -11,4 +11,17 @@ class User < ApplicationRecord
         username: self.username,
     }
   end
+
+  def all_beers(favorite: nil)
+    result = []
+    favs = user_beers.includes(:beer)
+    favs = favs.where(favorite: true) if favorite.present?
+    favs.each do |fav|
+      result << fav.beer.attributes.merge!(
+        favorite: fav.favorite
+      )
+    end
+
+    result
+  end
 end
