@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tagline: MyString
+  description: MyText
+  abv: 1.5
+
+two:
+  name: MyString
+  tagline: MyString
+  description: MyText
+  abv: 1.5
